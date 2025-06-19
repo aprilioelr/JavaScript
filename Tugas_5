@@ -1,0 +1,45 @@
+// Data Produk awal minimal 5
+let produkList = [
+  { id: 1, nama: "Laptop", harga: 12000000 },
+  { id: 2, nama: "Smartphone", harga: 5000000 },
+  { id: 3, nama: "Tablet", harga: 7000000 },
+  { id: 4, nama: "Monitor", harga: 2500000 },
+  { id: 5, nama: "Keyboard", harga: 500000 }
+];
+
+// Event Handler objek (contoh simulasi, bisa dikembangkan)
+const eventHandler = {
+  tambahProduk: function(id, nama, harga) {
+    // Menggunakan spread operator untuk menambah produk baru ke array produkList
+    produkList = [...produkList, { id, nama, harga }];
+    console.log(`Produk ${nama} berhasil ditambahkan.`);
+  },
+
+  hapusProduk: function(...ids) {
+    // Menggunakan rest parameter untuk menerima satu atau lebih id yang ingin dihapus
+    produkList = produkList.filter(produk => !ids.includes(produk.id));
+    console.log(`Produk dengan id ${ids.join(", ")} berhasil dihapus.`);
+  },
+
+  tampilkanProduk: function() {
+    console.log("Daftar Produk:");
+    produkList.forEach(({ id, nama, harga }) => {  // Destructuring objek produk
+      console.log(`ID: ${id} | Nama: ${nama} | Harga: Rp${harga.toLocaleString()}`);
+    });
+  }
+};
+
+// Menampilkan produk awal
+eventHandler.tampilkanProduk();
+
+// Contoh penambahan produk baru
+eventHandler.tambahProduk(6, "Mouse", 150000);
+
+// Tampilkan produk setelah penambahan
+eventHandler.tampilkanProduk();
+
+// Contoh hapus produk dengan id 2 dan 4
+eventHandler.hapusProduk(2, 4);
+
+// Tampilkan produk setelah penghapusan
+eventHandler.tampilkanProduk();
