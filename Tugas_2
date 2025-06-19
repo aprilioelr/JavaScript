@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Data Pegawai</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 50%;
+      margin: 20px auto;
+    }
+    th, td {
+      border: 1px solid #000;
+      padding: 8px 12px;
+      text-align: center;
+    }
+    thead {
+      background-color: #f2f2f2;
+    }
+    tfoot {
+      font-weight: bold;
+      background-color: #e0e0e0;
+    }
+  </style>
+</head>
+<body>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nama Pegawai</th>
+      <th>Umur</th>
+      <th>Jabatan</th>
+      <th>Status</th>
+      <th>Gaji Pokok</th>
+      <th>Tunjangan Jabatan</th>
+      <th>BPJS</th>
+      <th>Tunjangan Keluarga</th>
+    </tr>
+  </thead>
+  <tbody id="data-pegawai">
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="7">Total Gaji</td>
+      <td id="total-gaji"></td>
+    </tr>
+  </tfoot>
+</table>
+
+<script>
+  // Data pegawai
+  const nama = "Dodi Prayodi";
+  const umur = 25;
+  const jabatan = "Manajer";
+  const status = "Menikah";
+
+  // Menentukan Gaji Pokok
+  let gapok = 0;
+  if (jabatan.toLowerCase() === "manajer") {
+    gapok = 15000000;
+  } else if (jabatan.toLowerCase() === "asisten manajer") {
+    gapok = 10000000;
+  } else if (jabatan.toLowerCase() === "staff") {
+    gapok = 5000000;
+  }
+
+  // Hitung tunjangan
+  const tunjanganJabatan = 0.15 * gapok;
+  const bpjs = 0.10 * gapok;
+  const tunjanganKeluarga = (status.toLowerCase() === "menikah") ? 0.20 * gapok : 0;
+
+  // Hitung total gaji
+  const totalGaji = gapok + tunjanganJabatan + bpjs + tunjanganKeluarga;
+
+  // Cetak isi tbody
+  const tbody = document.getElementById("data-pegawai");
+  tbody.innerHTML = `
+    <tr>
+      <td>${nama}</td>
+      <td>${umur}</td>
+      <td>${jabatan}</td>
+      <td>${status}</td>
+      <td>Rp ${gapok.toLocaleString()}</td>
+      <td>Rp ${tunjanganJabatan.toLocaleString()}</td>
+      <td>Rp ${bpjs.toLocaleString()}</td>
+      <td>Rp ${tunjanganKeluarga.toLocaleString()}</td>
+    </tr>
+  `;
+
+  // Cetak total gaji
+  document.getElementById("total-gaji").innerText = `Rp ${totalGaji.toLocaleString()}`;
+</script>
+
+</body>
+</html>
